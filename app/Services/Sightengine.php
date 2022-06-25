@@ -44,13 +44,13 @@ class Sightengine
     }
 
     /**
-     * @param string $checkVideoSafe
+     * @param string $videoAddress
      * @return string|null
      */
-    public function checkVideoSafe(string $checkVideoSafe): ?string
+    public function checkVideoSafe(string $videoAddress): ?string
     {
         try {
-            $videoData = $this->client->check(['nudity'])->video_sync($checkVideoSafe);
+            $videoData = $this->client->check(['nudity'])->video_sync($videoAddress);
             foreach ($videoData->data->frames as $frame) {
                 if ($frame->nudity->safe < self::SAFE_MIN) {
                     return self::NOT_SAFE;
